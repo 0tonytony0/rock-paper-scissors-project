@@ -1,0 +1,400 @@
+@import url("https://fonts.google.com/specimen/Barlow+Semi+Condensed- Weights: 600, 700");
+
+:root{
+    --light-text:hsl(0, 0%, 100%); 
+    --dark-text:hsl(119, 92%, 24%);
+    --score-text:hsl(0, 0%, 0%);
+    --outline:hsla(0, 26%, 87%, 0.601);
+    --bg-gradient-1:hsl(118, 44%, 54%);
+    --bg-gradient-2:hsl(110, 76%, 15%);
+    --scissors:hsl(299, 45%, 76%);
+    --paper:hsl(37, 74%, 70%);
+    --rock:hsl(231, 63%, 62%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Barlow Semi Condensed', Arial, Helvetica, sans-serif;
+    background: radial-gradient(at top, var(--bg-gradient-1),var(--bg-gradient-2)) ;
+    min-height: 100vh;
+    text-transform: uppercase;
+    color: var(--light-text) ;
+}
+
+/* body*/
+
+.container{
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 20px;
+    text-transform: uppercase;
+}
+
+.header{
+    display: flex; /*position horizontally*/
+    justify-content: space-between; /* contents positioned left and right so they have space between them */
+    align-items: center; /* align vertically center*/
+    border: 2px solid var(--outline);
+    border-radius: 10px ;
+    height: 150px ;
+    padding: 2px 10px 2px 10px;
+}
+
+.score{
+    display: flex;
+    justify-content: space-around ;
+}
+
+.score_computer{
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 3px solid var(--outline);
+    border-radius: 10px;
+    height: 100%;
+    width: 120px;
+    margin: 10px;
+}
+
+.score_your{
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 3px solid var(--outline);
+    border-radius: 10px;
+    height: 100%;
+    width: 120px;
+    margin: 10px;
+}
+
+.score_title{
+    font-size: 10px;
+    font-weight: 550;
+    letter-spacing: 0.07;
+    color: var(--score-text);
+}
+
+.score_c{
+    font-size: 3.5rem;
+    font-weight: 500;
+    color: var(--dark-text);
+}
+
+.score_y{
+    font-size: 3.5rem;
+    font-weight: 500;
+    color: var(--dark-text);
+}
+
+/* game choice section */
+
+.game{
+    position: relative;
+    display: grid;
+    grid-template-columns: (repeat(2, 1fr));
+    grid-template-areas: 
+    "paper scissors"
+    "rock rock";
+    place-items: center;
+    height:30rem;
+    padding-top: 4rem;
+}
+
+.game::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 30.5%;
+    top: 30%;
+    background: url("./images/bg-triangle.svg") no-repeat;
+    z-index: -1;
+  }
+  
+
+.choice-btn {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+}
+
+.choice {
+    position: relative;
+    width: 8rem;
+    height: 8rem;
+    background: #fff;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+}
+
+.choice img{
+    transform: scale(1.2);
+}
+
+.choice::before,
+.choice::after {
+    content: "";
+    position: absolute;
+    left: -15%;
+    top: -15%;
+    width: 130%; /* 30% more than the choice div  */
+    height: 130%;
+    border-radius: 50%;
+    z-index: -1; /* put rings in the background*/
+}
+
+/* background rings for diff buttons */
+.choice.paper::before{
+    background: var(--paper);
+}
+.choice.scissors::before{
+    background: var(--scissors);
+}
+.choice.rock::before{
+    background: var(--rock);
+}
+
+
+.choice-btn[data-choice="paper"]{
+    grid-area: paper;
+}
+.choice-btn[data-choice="scissors"]{
+    grid-area: scissors;
+}
+.choice-btn[data-choice="rock"]{
+    grid-area: rock;
+}
+
+/*Rules button*/
+
+.rules-btn{
+    position:absolute;
+    bottom: 2rem;
+    right: 2rem;
+    background: none;
+    outline: none;
+    border: 2px solid var(--outline);
+    border-radius: 0.6rem;
+    color: var(--light-text);
+    padding: 0.6rem 2.5rem;
+    font-family: inherit;
+    text-transform: inherit; /* by default buttons dont inherit font so we have to use inherit */
+    font-size: 1.3rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+}
+
+.rules-btn:focus {
+    border: 2px solid #fff;
+}
+
+/* rules module*/
+
+.module {
+    position: absolute;
+    bottom: 10rem;
+    right: 3rem;
+    display: grid;
+    place-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none; 
+    /* there will be no pointer event when opacity is 0
+    If we did not use this we would still be able to click even when opacity is 0 */
+}
+.module_container {
+    background:#068f21;
+    border: 4px solid white;
+    border-radius: 0.5rem;
+    width: 20rem;
+    height: 25rem;
+
+}
+.module_header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.module_heading {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    color: var(--light-text);
+}
+.close-btn {
+    margin-top: 0.4rem;
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+}
+.close-btn img{
+    transform: scale(0.5);
+}
+.rules_contents {
+   padding: 1rem 1rem;
+   line-height: 1.2rem;
+   color: var(--light-text);
+}
+p{
+    margin-bottom: 1rem;
+}
+.show-module {
+    opacity: 1;
+    pointer-events: initial; /* on any pointer event sets property to the iniial value*/
+}
+
+
+/* Results*/
+
+.Results{
+    display:grid;
+    grid-template-columns: (repeat(2, 1fr));
+    grid-template-areas: 
+    "your-heading pc-heading"
+    "you-picked pc-picked ";
+    place-items: center;
+    max-width: 1000px; 
+    margin: 0 auto;
+}
+
+.result_heading {
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    padding: 4rem 0 8rem;
+}
+
+.result{
+  min-width: 10rem;
+  min-height: 10rem;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+/* first-of-type is a pseudo-class selects the first element of its type among a group of sibling elements.
+and vice-versa for last-of-type */
+.result_heading:first-of-type{   
+    grid-area: your-heading;
+}
+.result_heading:last-of-type{   
+    grid-area: pc-heading;
+}
+.result:first-of-type{   
+    grid-area: you-picked;
+}
+.result:last-of-type{   
+    grid-area: pc-picked;
+}
+
+/* results winner*/
+
+.Results.show-winner {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+    "your-heading . pc-heading"
+    "you-picked result-winner pc-picked ";
+}
+  
+
+.results_winner {
+    grid-area: result-winner;
+    display: grid;
+    place-items: center;
+}
+.results_text {
+    font-size: 2.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.play-again {
+    background: #fff;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 0.5rem;
+    color: var(--dark-text);
+    padding: 0.5rem 1.5rem;
+    font-family: inherit;
+    text-transform: inherit;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+}
+.play-again:focus {
+    border: 2px solid var(--outline);
+}
+  
+.winner .choice::after {
+    box-shadow: 0 0 0 30px hsl(111, 57%, 45%), 0 0 0 70px #6eb974, 0 0 0 100px hsl(119, 48%, 56%) ;
+    animation: winner 1s ease forwards;
+}
+
+@keyframes winner {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+
+/* next button*/
+
+.next-btn{
+    position:absolute;
+    bottom: 2rem;
+    right: 15rem;
+    background: none;
+    outline: none;
+    border: 2px solid var(--outline);
+    border-radius: 0.6rem;
+    color: var(--light-text);
+    padding: 0.65rem 3rem;
+    font-family: inherit;
+    text-transform: inherit; /* by default buttons dont inherit font so we have to use inherit */
+    font-size: 1.3rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    opacity:0
+}
+
+.next-btn:focus {
+    border: 2px solid #fff;
+}
+
+.show-next {
+    opacity: 1;
+    pointer-events: initial; /* on any pointer event sets property to the iniial value*/
+}
+
+
+.attribution { 
+    font-size: 11px; 
+    text-align: center; 
+}
+.attribution a { 
+    color: hsl(228, 45%, 44%);
+}
+
+/* Utilities*/
+
+.preload * {
+    transition: none;
+  }
+  
+
+.hidden{
+    display:none   /*results are initially hidden */
+}

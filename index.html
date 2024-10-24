@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+  
+  <title>Rock, Paper, Scissors</title>
+</head>
+
+<body>
+
+  <div class="container">
+    <header class="header">
+      <img src="./images/logo.svg" alt="logo" class="logo">
+      <div class="score">
+        <div class="score_your">
+          <div class="score_title">Your score</div>
+          <div class="score_y">0</div>
+        </div>
+        <div class="score_computer">
+          <div class="score_title">PC score</div>
+          <div class="score_c">0</div>
+        </div>
+      </div>  
+    </header> 
+
+    <section class="game">
+      <button class="choice-btn" data-choice="paper">
+        <div class="choice paper">
+          <img src="./images/icon-paper.svg" alt="Paper">
+        </div>
+      </button>
+      <button class="choice-btn" data-choice="scissors">
+        <div class="choice scissors">
+          <img src="./images/icon-scissors.svg" alt="Scissors">
+        </div>
+      </button>
+      <button class="choice-btn" data-choice="rock">
+        <div class="choice rock">
+          <img src="./images/icon-rock.svg" alt="Rock">
+        </div>
+      </button>
+    </section>
+  </div>
+
+  <button class="rules-btn">Rules</button>
+  <div class="module">
+    <div class="module_container">
+      <header class="module_header">
+        <h2 class="module_heading">Game Rules</h2>
+        <button class="close-btn">
+          <img src="./images/icons8-close.svg" alt="Close Button" />
+        </button>
+      </header>
+      <div class="rules_contents">
+        <p>1. Rock beats scissors, scissors beats paper and paper beats rocks.</p> 
+        <p>2. Agree ahead of time whether you'll count off "rock, paper, scissors, shoot !!" or just "rock, paper, scissors".</p>
+        <p>3. Use rock, paper, scissors to settle minor decisions or simple to pass the time.</p>
+        <p>4. If both players lay down the same hand, each player lays down another hand.</p>
+      </div>
+     
+    </div>
+  </div>
+
+  <section class="Results hidden">
+    <h2 class="result_heading">You picked</h2>
+    <h2 class="result_heading">PC picked</h2>
+    <div class="result"></div>
+    <div class="results_winner hidden">
+      <h3 class="results_text"></h3>
+      <button class="play-again">play again</button>
+    </div>
+    <div class="result"></div>
+
+    <button class="next-btn">next</button>
+
+
+  </section>
+
+  
+ 
+  <script src="app.js"></script>
+</body>
+</html>
